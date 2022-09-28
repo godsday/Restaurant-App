@@ -36,7 +36,10 @@ class HomeView extends GetView<HomeController> {
                             visible: homeController.showdata,
                             child: CustomExpansionTile(
                                 tileHeading: "Popular",
-                                iList:homeController.newpopular.length>3?homeController.newpopular.sublist(homeController.newpopular.length-3):homeController.newpopular),
+                                iList: homeController.newpopular.length > 3
+                                    ? homeController.newpopular.sublist(
+                                        homeController.newpopular.length - 3)
+                                    : homeController.newpopular),
                           );
                         }),
                         CustomExpansionTile(
@@ -87,10 +90,10 @@ class HomeView extends GetView<HomeController> {
                                     homeController.totalamount != 0
                                         ? Text(
                                             "\$ ${homeController.totalamount}")
-                                        : SizedBox()
+                                        : const SizedBox()
                                   ],
                                 ))
-                            : SizedBox();
+                            : const SizedBox();
                       }),
                     ))
               ],
@@ -125,100 +128,66 @@ class CustomExpansionTile extends StatelessWidget {
         children: List.generate(iList.length, (index) {
           final data = iList[index];
 
-          
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(children: [
-                Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  // color: Colors.blueGrey,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children: [
+              Container(
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                // color: Colors.blueGrey,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(data.name!,
+                            style: const TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold)),
+                        Text("\$ ${data.price!}",
+                            style: const TextStyle(fontSize: 17)),
+                      ],
+                    ),
+                    data.count! > 3
+                        ? const Text(
+                            "best seller",
+                            style: TextStyle(
+                                color: Colors.red, fontWeight: FontWeight.bold),
+                          )
+                        : const SizedBox(),
+                    const SizedBox(
+                      width: 100,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Row(
                         children: [
-                          Text(data.name!,
-                              style: const TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold)),
-                          Text("\$ ${data.price!}",
-                              style: const TextStyle(fontSize: 17)),
+                          IconButton(
+                              onPressed: () {
+                                controller.decrementButton(data);
+                              },
+                              icon: const Icon(Icons.minimize)),
+                          GetBuilder<HomeController>(builder: (context) {
+                            return Text("${data.count}");
+                          }),
+                          IconButton(
+                              onPressed: () {
+                                controller.incrementButton(data);
+                              },
+                              icon: const Icon(Icons.add)),
                         ],
                       ),
-
-                      // ElevatedButton(
-                      // onPressed: () {
-                      //   controller.itemCount(index);
-                      // },
-                      // child:
-
-                      //  Text("Add")
-
-                      //       )
-                      const SizedBox(
-                        width: 100,
-                      ),
-
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Row(
-                          children: [
-                            IconButton(
-                                onPressed: (){
-                                controller.decrementButton(data);},
-                                icon: const Icon(Icons.minimize)),
-                            GetBuilder<HomeController>(builder: (context) {
-                              return Text("${data.count}");
-                            }),
-                            IconButton(
-                                onPressed: () {
-                                  controller.incrementButton(data);
-                                 
-                                },
-                                icon: const Icon(Icons.add)),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-              ]
-
-                  // data.count!=0?
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       controller.itemCount(index);
-                  //     },
-                  //     child:
-
-                  //      Text("Add")
-
-                  // )    :
-
-                  ),
-            );
-       
+              ),
+            ]),
+          );
         }));
   }
 }
-
-// class TextCustom extends StatelessWidget {
-//   const TextCustom({
-//     Key? key,
-//     required this.data, required this.name,
-//   }) : super(key: key);
-
-//   final Category data;
-//   final String name;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Text(data.name!, style: TextStyle(fontSize: 27));
-//   }
-// }
