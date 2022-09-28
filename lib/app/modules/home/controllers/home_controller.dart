@@ -61,7 +61,7 @@ class HomeController extends GetxController {
 
     update();
   }
-
+  
   cleardata() {
     if (popular.isNotEmpty) {
       showdata = true;
@@ -75,15 +75,33 @@ class HomeController extends GetxController {
     for (var i = 0; i < newpopular.length - 1; i++) {
       for (var j = i + 1; j < newpopular.length; j++) {
         if (newpopular[i].name == newpopular[j].name) {
-          newpopular[i].count = newpopular[i].count! + newpopular[j].count!;
+     newpopular[i].count = newpopular[i].count! + newpopular[j].count!;
           newpopular.removeAt(j);
+
           j--;
         }
       }
     }
+    
+
+   
 
     totalamount = 0;
+  
 
     update();
+  }
+  bool visible=false;
+  besrtseller(data){
+     if(data.count!>3){
+             visible = true;
+           
+             
+           
+          }else{
+            visible=false;
+            data.count=0;
+          }
+
   }
 }
