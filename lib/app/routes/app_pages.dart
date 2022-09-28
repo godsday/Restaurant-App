@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/menu_screen/bindings/menu_screen_binding.dart';
-import '../modules/menu_screen/views/menu_screen_view.dart';
+import '../modules/place_order_screen/bindings/place_order_screen_binding.dart';
+import '../modules/place_order_screen/views/place_order_screen_view.dart';
 
 part 'app_routes.dart';
 
@@ -15,13 +15,13 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () =>  HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.MENU_SCREEN,
-      page: () => const MenuScreenView(),
-      binding: MenuScreenBinding(),
+      name: _Paths.PLACE_ORDER_SCREEN,
+      page: () =>  PlaceOrderScreenView(),
+      binding: PlaceOrderScreenBinding(),
     ),
   ];
 }

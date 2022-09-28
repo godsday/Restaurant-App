@@ -4,11 +4,13 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
-  static const MENU_SCREEN = _Paths.MENU_SCREEN;
+
+  static const PLACE_ORDER_SCREEN = _Paths.PLACE_ORDER_SCREEN;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
-  static const MENU_SCREEN = '/menu-screen';
+
+  static const PLACE_ORDER_SCREEN = '/place-order-screen';
 }
